@@ -2,8 +2,8 @@ pipeline {
     agent any
     environment {
         PROJECT_ID = 'niveus-technology-rnd'
-        CLUSTER_NAME = 'setu-cluster-jenkins'
-        LOCATION = 'us-central1'
+        CLUSTER_NAME = 'cicd'
+        LOCATION = 'us-central1-c'
         CREDENTIALS_ID = 'kubernetes'
     }
     stages {
