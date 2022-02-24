@@ -19,16 +19,20 @@ pipeline {
                 }
             }
         }
-        stage("Push image") {
+
+        stage("Push Docker Image") {
             steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                            myapp.push("latest")
-                            myapp.push("${env.BUILD_ID}")
-                    }
-                }
-            }
-        }        
+	            script {
+				    echo "Push Docker Image"
+				    withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
+            				sh "docker login -u fazilniveus -p ${dockerhub}"
+				    }
+				        myimage.push("${env.BUILD_ID}")
+				    
+			    }
+		    }
+	    }
+
         stage('Deploy to GKE') {
             steps{
                 sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' deployment.yaml"
