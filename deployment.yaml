@@ -1,38 +1,36 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-name: hello
-labels:
-  app: hello
+ name: myapp
+ labels:
+  app: myapp
 spec:
-strategy:
-  type: Recreate
-template:
-  metadata:
-    labels:
-      app: hello
-      tier: hello
+ replicas: 1
+ selector:
+  matchLabels:
+   app: myapp
+ template:
+  metadata: 
+   labels:
+    app: myapp
   spec:
-    containers:
-    - name: hello
-      image: fazilniveus/abc:tagversion
-      imagePullPolicy: Always
-      ports:
-      - containerPort: 5000
-        name: hello
+   containers:
+   - name: myapp
+     image: fazilniveus/devops:tagversion
+     ports:
+     - containerPort: 5000
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-name: hello
-labels:
-  app: hello
+  name: myapp
 spec:
-ports:
-  - port: 5000
-    targetPort: 5000
-selector:
-  app: hello
-  tier: hello
-type: LoadBalancer
+  type: LoadBalancer
+  selector:
+    app: myapp
+  ports:
+    - protocol: TCP
+      port: 50
+      targetPort: 5000
