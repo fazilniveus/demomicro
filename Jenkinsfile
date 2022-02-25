@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         PROJECT_ID = 'niveus-technology-rnd'
-        CLUSTER_NAME = 'cicd'
+        CLUSTER_NAME = 'faz'
         LOCATION = 'us-central1-c'
         CREDENTIALS_ID = 'kubernetes'
     }
