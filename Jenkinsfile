@@ -15,7 +15,7 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("fazilniveus/abc:${env.BUILD_ID}")
+                    myapp = docker.build("fazilniveus/devops:${env.BUILD_ID}")
                 }
             }
         }
